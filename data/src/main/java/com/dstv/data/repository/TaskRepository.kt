@@ -35,8 +35,10 @@ class TaskRepository @Inject constructor(
         }
     }
 
-    override suspend fun deleteAllTasks() {
-        dataSource.deleteAllTasks()
+    override suspend fun deleteAllTasks(): Flow<ArrayList<Task>> {
+        return dataSource.deleteAllTasks().map {
+            TaskMapper.toDomainListResource(it)
+        }
     }
 
     override suspend fun deleteTask(task: Task): Flow<ArrayList<Task>> {

@@ -74,6 +74,8 @@ dependencies {
 
         //Stream Support
         implementation(STREAM_SUPPORT)
+
+        implementation(LOTTIE)
     }
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.31")

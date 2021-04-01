@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="com.dstv.tododstv.features.todo.TodoViewModel" />
@@ -22,23 +24,23 @@
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/add_note_bg"
             android:drawableStart="@drawable/ic_baseline_search_24"
-            android:padding="16dp"
-            android:hint="Search for a task"
-            android:maxLines="1"
-            android:text="@={viewModel.searchRequest.keyword}"
-            android:inputType="text"
+            android:drawablePadding="12dp"
             android:fontFamily="@font/montserrat_regular"
+            android:hint="Search for a task"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:text="@={viewModel.searchRequest.keyword}"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:drawablePadding="12dp"
-            android:background="@drawable/add_note_bg"
             app:layout_constraintEnd_toStartOf="@id/settingsIcon"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/settingsIcon"
@@ -47,12 +49,12 @@
             android:layout_marginEnd="26dp"
             android:src="@drawable/settings_icon"
             app:layout_constraintBottom_toBottomOf="@id/searchEditText"
-            app:layout_constraintEnd_toStartOf="@id/bellIcon"
+            app:layout_constraintEnd_toStartOf="@id/sort"
             app:layout_constraintTop_toTopOf="@id/searchEditText"
             app:tint="@color/white" />
 
         <ImageView
-            android:id="@+id/bellIcon"
+            android:id="@+id/sort"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
@@ -70,11 +72,11 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/sharp_sans"
-            tools:text="@string/get_started"
-            android:text="@{viewModel.categoryList.empty? @string/get_started: @string/manage}"
+            android:text="@{viewModel.taskList.empty? @string/get_started: @string/manage}"
             android:textColor="@color/white"
             android:textSize="34sp"
-            app:layout_constraintTop_toBottomOf="@id/searchEditText" />
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            tools:text="@string/get_started" />
 
         <TextView
             android:id="@+id/categoriesTitle"
@@ -123,27 +125,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            app:viewModel="@{viewModel}"
             app:layout_constraintBottom_toBottomOf="@id/tasksTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tasksTitle" />
+            app:layout_constraintTop_toTopOf="@id/tasksTitle"
+            app:viewModel="@{viewModel}" />
 
         <TextView
             android:id="@+id/tip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_outline_info_24"
-            android:text="Tip: Long hold a task to enable multiselect"
-            android:fontFamily="@font/montserrat_regular"
-            app:layout_constraintTop_toBottomOf="@id/tasksTitle"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
-            android:textSize="12sp"
-            android:gravity="center|start"
+            android:drawableStart="@drawable/ic_outline_info_24"
             android:drawablePadding="8dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center|start"
+            android:text="Tip: Long hold a task to enable multiselect"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@id/taskmanagementlayout"
-            android:textColor="@color/white"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tasksTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecyclerView"
@@ -153,11 +155,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tip"
-            tools:listitem="@layout/task_row" />
+            tools:listitem="@layout/task_row"
+            tools:visibility="gone" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -171,6 +174,18 @@
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="@{viewModel.taskList.empty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tip"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="notes.json"
+            app:lottie_loop="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

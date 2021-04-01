@@ -1,8 +1,90 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.dstv.tododstv.core.enums.TaskSortEnum" />
+
+        <variable
+            name="viewModel"
+            type="com.dstv.tododstv.features.todo.TodoViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_round_top_solid_white">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/sharp_sans"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Sort Tasks by" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layoutDirection="rtl"
+                android:onClick="@{() -> viewModel.sortTask(TaskSortEnum.CATEGORY)}"
+                android:text="Category"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layoutDirection="rtl"
+                android:onClick="@{() -> viewModel.sortTask(TaskSortEnum.COMPLETED)}"
+                android:text="Completed"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layoutDirection="rtl"
+                android:onClick="@{() -> viewModel.sortTask(TaskSortEnum.DATE_CREATED_ASCENDING)}"
+                android:text="Date created"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layoutDirection="rtl"
+                android:onClick="@{() -> viewModel.sortTask(TaskSortEnum.DATE_UPDATED_ASCENDING)}"
+                android:text="Date updated"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+
+        </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

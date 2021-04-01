@@ -18,7 +18,7 @@ interface ITaskRepository {
     suspend fun updateTask(task: Task): Flow<ArrayList<Task>>
 
     //Deleting
-    suspend fun deleteAllTasks()
+    suspend fun deleteAllTasks(): Flow<ArrayList<Task>>
 
     suspend fun deleteTask(task: Task): Flow<ArrayList<Task>>
 

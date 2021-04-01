@@ -7,16 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.databinding.FragmentTodoBinding
 import com.dstv.tododstv.features.common.BaseFragment
+import com.dstv.tododstv.features.settings.SettingsFragment
+import com.dstv.tododstv.features.sort.FragmentSortTasks
 import com.dstv.tododstv.features.task.AddTaskFragment
 import com.dstv.tododstv.features.task.TaskCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TodoFragment: BaseFragment(), TaskCallback {
+class TodoFragment : BaseFragment(), TaskCallback {
 
     private lateinit var binding: FragmentTodoBinding
 
-    private val viewModel : TodoViewModel by activityViewModels()
+    private val viewModel: TodoViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTodoBinding.inflate(inflater)
@@ -27,6 +29,12 @@ class TodoFragment: BaseFragment(), TaskCallback {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        configureBottomSheetClicks()
+    }
+
+    private fun configureBottomSheetClicks() {
+        binding.sort.setOnClickListener { getBottomSheet(FragmentSortTasks.newInstance(this))?.show(parentFragmentManager, "Sort") }
+        binding.settingsIcon.setOnClickListener { getBottomSheet(SettingsFragment.newInstance(this))?.show(parentFragmentManager, "Settings") }
         binding.fab.setOnClickListener { getBottomSheet(AddTaskFragment.newInstance(false, null, this))?.show(parentFragmentManager, "AddTask") }
     }
 

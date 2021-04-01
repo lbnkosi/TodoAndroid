@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskCategoryEnum
+import com.dstv.tododstv.core.enums.TaskSortEnum
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.core.util.CategoryCount
+import com.dstv.tododstv.core.util.TaskSort
 import com.dstv.tododstv.features.common.SearchRequest
 import com.dstv.tododstv.features.common.TaskRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -128,6 +130,10 @@ class TodoViewModel @Inject constructor(
         _success.value = false
     }
 
+    fun sortTask(type: TaskSortEnum) {
+        setTaskList(TaskSort.sortTask(type, _taskList.value!!))
+    }
+
     private fun createTask() {
         viewModelScope.launch {
             useCase.createTask(TaskMapper.toDomain(task)).collect {
@@ -162,6 +168,15 @@ class TodoViewModel @Inject constructor(
                 setTaskList(TaskMapper.toPresenter(it))
             }
             _selectAll.value = selectAll.value == false
+        }
+    }
+
+    fun deleteAllTasks() {
+        viewModelScope.launch {
+            useCase.deleteAllTasks().collect {
+                _success.value = true
+                setTaskList(TaskMapper.toPresenter(it))
+            }
         }
     }
 
