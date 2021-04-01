@@ -51,13 +51,28 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progress"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 tools:progress="60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/completeText"
                 app:indicatorColor="@color/dark_violet"
                 app:layout_constraintTop_toBottomOf="@id/categoryName"
                 app:trackColor="@color/material_blue_grey_light" />
+
+            <TextView
+                android:id="@+id/completeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{categoryDisplay.completeText}"
+                tools:text="50%"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/progress"
+                app:layout_constraintBottom_toBottomOf="@id/progress"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

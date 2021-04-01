@@ -14,6 +14,7 @@ class CategoryDisplayMapper {
             category = it.title
             taskCount = "${it.count} Tasks"
             complete = if (it.count == 0) 0 else ((it.complete.toDouble()/it.count.toDouble()) * 100).toInt()
+            completeText = "${complete}%"
         }
     }
 

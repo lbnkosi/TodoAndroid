@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -15,177 +15,212 @@
             type="androidx.fragment.app.FragmentManager" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_slate_blue">
+        android:fillViewport="true">
 
-        <EditText
-            android:id="@+id/searchEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/add_note_bg"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:drawablePadding="12dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:hint="Search for a task"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="16dp"
-            android:text="@={viewModel.searchRequest.keyword}"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toStartOf="@id/settingsIcon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/settingsIcon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="26dp"
-            android:src="@drawable/settings_icon"
-            app:layout_constraintBottom_toBottomOf="@id/searchEditText"
-            app:layout_constraintEnd_toStartOf="@id/sort"
-            app:layout_constraintTop_toTopOf="@id/searchEditText"
-            app:tint="@color/white" />
-
-        <ImageView
-            android:id="@+id/sort"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/refine_icon"
-            app:layout_constraintBottom_toBottomOf="@id/searchEditText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/searchEditText"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/greet"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/sharp_sans"
-            android:text="@{viewModel.taskList.empty? @string/get_started: @string/manage}"
-            android:textColor="@color/white"
-            android:textSize="34sp"
-            app:layout_constraintTop_toBottomOf="@id/searchEditText"
-            tools:text="@string/get_started" />
+            android:background="@color/dark_slate_blue">
 
-        <TextView
-            android:id="@+id/categoriesTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:text="Categories"
-            android:textAllCaps="true"
-            android:textColor="@color/corn_flower_blue"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/greet" />
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/add_note_bg"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="Search for a task"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="16dp"
+                android:text="@={viewModel.searchRequest.keyword}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/settingsIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryRecyclerView"
-            bindCategoryRecyclerView="@{viewModel.categoryList}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/categoriesTitle"
-            tools:listitem="@layout/category_progress_row" />
+            <ImageView
+                android:id="@+id/settingsIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="26dp"
+                android:src="@drawable/settings_icon"
+                app:layout_constraintBottom_toBottomOf="@id/searchEditText"
+                app:layout_constraintEnd_toStartOf="@id/sort"
+                app:layout_constraintTop_toTopOf="@id/searchEditText"
+                app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/tasksTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:text="Tasks"
-            android:textAllCaps="true"
-            android:textColor="@color/corn_flower_blue"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categoryRecyclerView" />
+            <ImageView
+                android:id="@+id/sort"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/refine_icon"
+                app:layout_constraintBottom_toBottomOf="@id/searchEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/searchEditText"
+                app:tint="@color/white" />
 
-        <include
-            android:id="@+id/taskmanagementlayout"
-            layout="@layout/task_selection_row"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/tasksTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tasksTitle"
-            app:viewModel="@{viewModel}" />
+            <TextView
+                android:id="@+id/greet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/sharp_sans"
+                android:text="@{viewModel.taskList.empty? @string/get_started: @string/manage}"
+                android:textColor="@color/white"
+                android:textSize="34sp"
+                app:layout_constraintTop_toBottomOf="@id/searchEditText"
+                tools:text="@string/get_started" />
 
-        <TextView
-            android:id="@+id/tip"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:drawableStart="@drawable/ic_outline_info_24"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:gravity="center|start"
-            android:text="Tip: Long hold a task to enable multiselect"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/taskmanagementlayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tasksTitle" />
+            <TextView
+                android:id="@+id/categoriesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Categories"
+                android:textAllCaps="true"
+                android:textColor="@color/corn_flower_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/greet" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tasksRecyclerView"
-            bindTaskRecyclerView="@{viewModel.taskList}"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tip"
-            tools:listitem="@layout/task_row"
-            tools:visibility="gone" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRecyclerView"
+                bindCategoryRecyclerView="@{viewModel.categoryList}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/categoriesTitle"
+                tools:listitem="@layout/category_progress_row" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/material_pink_primary_700"
-            android:contentDescription="Create Note"
-            android:src="@drawable/ic_baseline_add_24"
-            app:borderWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/totalProgressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Total Progress"
+                android:textAllCaps="true"
+                android:textColor="@color/corn_flower_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categoryRecyclerView" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:visibility="@{viewModel.taskList.empty ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tip"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="notes.json"
-            app:lottie_loop="true" />
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/totalProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/blue_button_10dp"
+                android:padding="26dp"
+                bindTotalProgress="@{viewModel.taskList}"
+                app:indicatorColor="@color/dark_violet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/totalProgressTitle"
+                app:trackColor="@color/material_blue_grey_light"
+                tools:progress="60" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tasksTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Tasks"
+                android:textAllCaps="true"
+                android:textColor="@color/corn_flower_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/totalProgress" />
+
+            <include
+                android:id="@+id/taskmanagementlayout"
+                layout="@layout/task_selection_row"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/tasksTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tasksTitle"
+                app:viewModel="@{viewModel}" />
+
+            <TextView
+                android:id="@+id/tip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_outline_info_24"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center|start"
+                android:text="Tip: Long hold a task to enable multiselect"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/taskmanagementlayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tasksTitle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tasksRecyclerView"
+                bindTaskRecyclerView="@{viewModel.taskList}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tip"
+                tools:listitem="@layout/task_row"
+                tools:visibility="gone" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/material_pink_primary_700"
+                android:contentDescription="Create Note"
+                android:src="@drawable/ic_baseline_add_24"
+                app:borderWidth="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="@{viewModel.taskList.empty ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tip"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="notes.json"
+                app:lottie_loop="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>

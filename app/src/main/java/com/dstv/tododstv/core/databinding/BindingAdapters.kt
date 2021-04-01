@@ -1,8 +1,6 @@
 package com.dstv.tododstv.core.databinding
 
-import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.FragmentActivity
@@ -11,6 +9,7 @@ import com.dstv.tododstv.core.adapters.CategoryAdapter
 import com.dstv.tododstv.core.adapters.TaskAdapter
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 object BindingAdapters {
@@ -37,8 +36,15 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("textChangedListener")
-    fun bindTextWatcher(editText: EditText, textWatcher: TextWatcher) {
-        editText.addTextChangedListener(textWatcher)
+    @BindingAdapter("bindTotalProgress")
+    fun bindTotalProgress(linearProgressIndicator: LinearProgressIndicator, taskList: ArrayList<Task>?) {
+        var totalTasks = 0
+        var completedTasks = 0
+        taskList?.forEach {
+            totalTasks++
+            if (it.isComplete) completedTasks++
+        }
+        linearProgressIndicator.setProgressCompat(((completedTasks.toDouble() / totalTasks.toDouble()) * 100).toInt(), true)
     }
+
 }

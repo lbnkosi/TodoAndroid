@@ -108,10 +108,6 @@ class TodoViewModel @Inject constructor(
         if (multiSelectTaskList.isEmpty()) isMultiSelectEnabled = false
     }
 
-    fun getSelectedTaskList(): ArrayList<Task> {
-        return multiSelectTaskList
-    }
-
     fun setSelectAll() {
         _selectAll.value = selectAll.value == false
     }
@@ -209,10 +205,10 @@ class TodoViewModel @Inject constructor(
         if (taskRequest.isRequestValid()) {
             val currentTime = Calendar.getInstance().time.toString()
             if (!isEdit) {
-                task = Task(id = 0, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateCreated = currentTime, dateUpdated = currentTime, subTaskList = arrayListOf())
+                task = Task(id = 0, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateCreated = currentTime, dateUpdated = currentTime)
                 createTask()
             } else {
-                task = Task(id = task.id, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateUpdated = currentTime, dateCreated = task.dateCreated, subTaskList = arrayListOf())
+                task = Task(id = task.id, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateUpdated = currentTime, dateCreated = task.dateCreated)
                 updateTask()
             }
         }

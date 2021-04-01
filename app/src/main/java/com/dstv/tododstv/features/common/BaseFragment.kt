@@ -8,8 +8,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 abstract class BaseFragment: Fragment() {
 
-    private var mDialogUtils: DialogUtils? = null
-
     private var mBottomSheetDialogUtilFragment: BottomSheetDialogUtilFragment? = null
 
     open fun getBottomSheet(aFragment: BaseFragment?): BottomSheetDialogUtilFragment? {
@@ -20,7 +18,5 @@ abstract class BaseFragment: Fragment() {
     fun dismissBottomSheet() {
         mBottomSheetDialogUtilFragment?.dismiss()
     }
-
-    fun getDialog(): DialogUtils = if (mDialogUtils != null) mDialogUtils!! else DialogUtils(requireContext(), false)
 
 }

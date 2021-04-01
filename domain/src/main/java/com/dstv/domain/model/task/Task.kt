@@ -8,5 +8,4 @@ data class Task(
     var category: Int = 0,
     var dateCreated: String = "",
     var dateUpdated: String = "",
-    var subTaskList: ArrayList<SubTask> = arrayListOf()
 )

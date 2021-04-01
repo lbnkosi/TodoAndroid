@@ -50,9 +50,4 @@ object TaskMapper {
             //task.subTaskList
         )
     }
-
-    fun toEntityList(): ArrayList<TaskEntity> {
-        return arrayListOf()
-    }
-
 }

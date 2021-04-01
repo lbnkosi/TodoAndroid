@@ -4,19 +4,6 @@ import com.dstv.tododstv.core.models.Task
 
 object TaskMapper {
 
-    fun toPresenter(task: com.dstv.domain.model.task.Task): Task {
-        return Task(
-            task.id,
-            task.title,
-            task.note,
-            task.isComplete,
-            task.category,
-            task.dateCreated,
-            task.dateUpdated,
-            //task.subTaskList
-        )
-    }
-
     fun toPresenter(taskList: ArrayList<com.dstv.domain.model.task.Task>): ArrayList<Task> {
         val newList: ArrayList<Task> = arrayListOf()
         taskList.forEach {
@@ -29,7 +16,6 @@ object TaskMapper {
                     it.category,
                     it.dateCreated,
                     it.dateUpdated,
-                    //it.subTaskList
                 )
             )
         }
@@ -45,7 +31,6 @@ object TaskMapper {
             task.category,
             task.dateCreated,
             task.dateUpdated,
-            //task.subTaskList
         )
     }
 

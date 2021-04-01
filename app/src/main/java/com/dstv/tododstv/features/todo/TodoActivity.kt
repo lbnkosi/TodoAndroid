@@ -15,8 +15,6 @@ class TodoActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTodoBinding
 
-    private val viewModel: TodoViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_todo)

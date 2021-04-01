@@ -2,9 +2,7 @@ package com.dstv.data.model.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.dstv.domain.model.task.SubTask
 
 @Entity(tableName = "Tasks")
 class TaskEntity(
@@ -27,7 +25,4 @@ class TaskEntity(
 
     @ColumnInfo(name = "dateUpdated")
     var dateUpdated: String = "",
-
-    @Ignore
-    var subTaskList: ArrayList<SubTask> = arrayListOf()
 )
