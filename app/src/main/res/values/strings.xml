@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TodoDstv</string>
+
+    <string name="okay_text">Okay</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="create_task">Create Task</string>
+    <string name="edit_task">Edit Task</string>
+
+    <string name="done">Done</string>
+    <string name="update">Update</string>
+    <string name="get_started">Get started by creating a task</string>
+    <string name="manage">Manage your tasks. Add, edit and delete</string>
+</resources>

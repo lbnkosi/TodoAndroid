@@ -1,0 +1,174 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.dstv.tododstv.core.enums.TaskCategoryEnum" />
+
+        <variable
+            name="viewModel"
+            type="com.dstv.tododstv.features.todo.TodoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_round_top_solid_white">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/sharp_sans"
+            android:text="@{viewModel.isEdit? @string/edit_task: @string/create_task}"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/done"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/done"
+            tools:text="Edit Task" />
+
+        <TextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/green_button_10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:onClick="@{() -> viewModel.createTaskModel()}"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:text="@{viewModel.isEdit? @string/update: @string/done}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginEnd="32dp"
+            tools:text="Update" />
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/red_button_10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:onClick="@{() -> viewModel.deleteTask()}"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:text="Delete"
+            android:textColor="@color/white"
+            android:visibility="@{viewModel.isEdit? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/taskSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:checked="@={viewModel.complete}"
+            android:fontFamily="@font/montserrat_regular"
+            android:onCheckedChanged="@{(button, bool) -> viewModel.setIsComplete(bool)}"
+            android:text="Completed"
+            android:visibility="@{viewModel.isEdit? View.VISIBLE: View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/done" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/add_note_bg"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="Title"
+            android:padding="16dp"
+            android:text="@={viewModel.taskRequest.title}"
+            app:layout_constraintTop_toBottomOf="@id/taskSwitch" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/add_note_bg"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="top"
+            android:hint="Note"
+            android:padding="16dp"
+            android:text="@={viewModel.taskRequest.note}"
+            app:layout_constraintTop_toBottomOf="@id/task" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/add_note_bg"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/note"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/categoryOne"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.checkedCategory == 1? true: false}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_ONE)}"
+                android:text="Personal" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/categoryTwo"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.checkedCategory == 2? true: false}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_TWO)}"
+                android:text="Business" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/categoryThree"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.checkedCategory == 3? true: false}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_THREE)}"
+                android:text="Work" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/categoryFour"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.checkedCategory == 4? true: false}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_FOUR)}"
+                android:text="School" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/categoryFive"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.checkedCategory == 5? true: false}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_FIVE)}"
+                android:text="Other" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
