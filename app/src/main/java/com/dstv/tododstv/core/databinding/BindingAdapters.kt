@@ -1,7 +1,9 @@
 package com.dstv.tododstv.core.databinding
 
 import android.view.View
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +47,12 @@ object BindingAdapters {
             if (it.isComplete) completedTasks++
         }
         linearProgressIndicator.setProgressCompat(((completedTasks.toDouble() / totalTasks.toDouble()) * 100).toInt(), true)
+    }
+
+    @JvmStatic
+    @BindingAdapter("showHideGroup")
+    fun showHideGroup(group: Group, showHide: Boolean) {
+        group.isVisible = showHide
     }
 
 }

@@ -73,7 +73,7 @@
                 android:fontFamily="@font/montserrat_regular"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/categoryName"
-                android:text="12 Jan 21, 18:00"/>
+                android:text="@{taskDisplay.taskDateUpdated}"/>
 
         </LinearLayout>
 

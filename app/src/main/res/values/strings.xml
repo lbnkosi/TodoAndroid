@@ -11,4 +11,6 @@
     <string name="update">Update</string>
     <string name="get_started">Get started by creating a task</string>
     <string name="manage">Manage your tasks. Add, edit and delete</string>
+    <string name="show_stats">Show Stats</string>
+    <string name="hide_stats">Hide Stats</string>
 </resources>

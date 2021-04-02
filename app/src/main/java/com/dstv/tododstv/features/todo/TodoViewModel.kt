@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskCategoryEnum
 import com.dstv.tododstv.core.enums.TaskSortEnum
+import com.dstv.tododstv.core.extensions.getDate
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
@@ -26,10 +27,6 @@ class TodoViewModel @Inject constructor(
     private val useCase: TaskUseCase
 ) : ViewModel() {
 
-    var isMultiSelectEnabled: Boolean = false
-
-    var multiSelectTaskList: ArrayList<Task> = arrayListOf()
-
     var category: Int = 1
 
     var task: Task = Task()
@@ -38,9 +35,13 @@ class TodoViewModel @Inject constructor(
 
     var isComplete: Boolean = false
 
+    var isMultiSelectEnabled: Boolean = false
+
     var taskRequest: TaskRequest = TaskRequest()
 
     var searchRequest: SearchRequest = SearchRequest()
+
+    var multiSelectTaskList: ArrayList<Task> = arrayListOf()
 
     val success: LiveData<Boolean> get() = _success
 
@@ -163,7 +164,7 @@ class TodoViewModel @Inject constructor(
                 _success.value = true
                 setTaskList(TaskMapper.toPresenter(it))
             }
-            _selectAll.value = selectAll.value == false
+            _selectAll.value = false
         }
     }
 
@@ -203,7 +204,7 @@ class TodoViewModel @Inject constructor(
 
     fun createTaskModel() {
         if (taskRequest.isRequestValid()) {
-            val currentTime = Calendar.getInstance().time.toString()
+            val currentTime = getDate()
             if (!isEdit) {
                 task = Task(id = 0, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateCreated = currentTime, dateUpdated = currentTime)
                 createTask()

@@ -1,6 +1,5 @@
 package com.dstv.tododstv.core.mappers.display
 
-import android.graphics.drawable.Drawable
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.core.models.TaskDisplay
 import com.dstv.tododstv.core.util.TaskStatus
@@ -14,6 +13,7 @@ class TaskDisplayMapper {
         TaskDisplay().apply {
             title = it.title
             taskStatusBg = TaskStatus.get(it.isComplete, it.category)
+            taskDateUpdated = it.dateUpdated
         }
     }
 

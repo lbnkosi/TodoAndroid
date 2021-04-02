@@ -29,10 +29,12 @@ class TodoFragment : BaseFragment(), TaskCallback {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        configureBottomSheetClicks()
+        binding.show = false
+        configureOnClicks()
     }
 
-    private fun configureBottomSheetClicks() {
+    private fun configureOnClicks() {
+        binding.showHideStats.setOnClickListener { binding.show = !binding.show!! }
         binding.sort.setOnClickListener { getBottomSheet(FragmentSortTasks.newInstance(this))?.show(parentFragmentManager, "Sort") }
         binding.settingsIcon.setOnClickListener { getBottomSheet(SettingsFragment.newInstance(this))?.show(parentFragmentManager, "Settings") }
         binding.fab.setOnClickListener { getBottomSheet(AddTaskFragment.newInstance(false, null, this))?.show(parentFragmentManager, "AddTask") }

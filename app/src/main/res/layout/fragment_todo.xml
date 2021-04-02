@@ -7,6 +7,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="show"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.dstv.tododstv.features.todo.TodoViewModel" />
 
@@ -97,6 +101,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/greet" />
 
+            <TextView
+                android:id="@+id/showHideStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/green_button_10dp"
+                android:text="@{show? @string/hide_stats : @string/show_stats}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/categoriesTitle"
+                app:layout_constraintBottom_toBottomOf="@id/categoriesTitle"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingBottom="8dp"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoryRecyclerView"
                 bindCategoryRecyclerView="@{viewModel.categoryList}"
@@ -107,7 +128,7 @@
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/categoriesTitle"
+                app:layout_constraintTop_toBottomOf="@id/showHideStats"
                 tools:listitem="@layout/category_progress_row" />
 
             <TextView
@@ -193,7 +214,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tip"
                 tools:listitem="@layout/task_row"
-                tools:visibility="gone" />
+                tools:visibility="visible" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
@@ -219,6 +240,13 @@
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="notes.json"
                 app:lottie_loop="true" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/showHideGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                showHideGroup="@{show}"
+                app:constraint_referenced_ids="categoryRecyclerView, totalProgress, totalProgressTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
