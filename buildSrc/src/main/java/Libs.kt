@@ -20,11 +20,6 @@ object Libs {
     //Lottie
     const val LOTTIE = "com.airbnb.android:lottie:3.6.0"
 
-    //Retrofit
-    const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
-    const val RETROFIT_CONVERTER_GSON = "com.squareup.retrofit2:converter-gson:2.9.0"
-    const val OKHTTP_LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.0"
-
     const val TIMBER = "com.jakewharton.timber:timber:4.7.1"
 
     const val DAGGER = "com.google.dagger:dagger:2.28"
@@ -49,39 +44,10 @@ object Libs {
     const val ROOM_RUNTIME = "androidx.room:room-runtime:2.2.6"
     const val ROOM_TESTING = "androidx.room:room-testing:2.2.6" //testImplementation
 
-    //Stetho - https://github.com/facebookarchive/stetho
-    const val STETHO = "com.facebook.stetho:stetho:1.5.1"
-    const val STETHO_OKTTP = "com.facebook.stetho:stetho-okhttp3:1.5.1"
-
     //StreamSupport - https://github.com/stefan-zobel/streamsupport
     const val STREAM_SUPPORT = "net.sourceforge.streamsupport:streamsupport:1.7.3"
 
-    //Glide - https://github.com/bumptech/glide
-    const val GLIDE = "com.github.bumptech.glide:glide:4.12.0"
-    const val GLIDER_COMPILER = "com.github.bumptech.glide:compiler:4.12.0" //annotationProcessor
-
-    const val CONVERTER_MOSHI = "com.squareup.retrofit2:converter-moshi:2.4.0"
-
-    const val MULTIDEX = "androidx.multidex:multidex:2.0.1"
-
-    //Project Build Gradle
-    const val BUILD_GRADLE = "com.android.tools.build:gradle:4.1.2"
-    const val KOTLIN_GRADLE = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31"
-    const val GOOGLE_SERVICES = "com.google.gms:google-services:4.3.5"
-
-    //Play services & place libs
-    const val ANDROID_PLACE = "com.google.android.libraries.places:places:2.4.0"
-    const val GMS_PLAY_SERVICE_MAPS = "com.google.android.gms:play-services-maps:17.0.0"
-    const val GMS_SERVICES_PLACES = "com.google.android.gms:play-services-places:17.0.0"
-    const val GMS_PLAY_SERVICES_LOCATION = "com.google.android.gms:play-services-location:18.0.0"
-
-    //Easy permissions
-    const val EASY_PERMISSIONS = "pub.devrel:easypermissions:3.0.0"
-
     const val ANDROID_DEBUG = "com.amitshekhar.android:debug-db:1.0.6"
-
-    const val FIREBASE_BOM = "com.google.firebase:firebase-bom:26.7.0"
-    const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx"
 
     const val HILT_ANDROID = "com.google.dagger:hilt-android:2.33-beta"
     const val HILT_COMPILER = "com.google.dagger:hilt-compiler:2.33-beta"

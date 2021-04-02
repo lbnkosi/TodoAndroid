@@ -47,13 +47,18 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation("androidx.room:room-runtime:2.2.6")
-    annotationProcessor("androidx.room:room-compiler:2.2.6")
-
     Libs.apply {
+
+        //Android/Google/Kotlin
+        implementation(MATERIAL)
+        implementation(APP_COMPAT)
+        implementation(VIEW_PAGER_2)
+        implementation(ANDROID_CORE)
+        implementation(SWIPE_REFRESH)
+        implementation(CONSTRAINT_LAYOUT)
+        implementation(KOTLIN_STANDARD_LIB)
+        implementation(KOTLIN_COROUTINES_ANDROID)
+
         //Hilt
         kapt(HILT_COMPILER)
         implementation(HILT_ANDROID)
@@ -69,21 +74,26 @@ dependencies {
         implementation(LIFECYCLE_EXTENSIONS)
         implementation(LIFECYCLE_COMMON_JAVA_8)
 
+        //Room
+        annotationProcessor(ROOM_COMPILER)
+        implementation(ROOM_KTX)
+        implementation(ROOM_RUNTIME)
+        testImplementation(ROOM_TESTING)
+
+        //Junit expresso
+        testImplementation(JUNIT)
+        androidTestImplementation(ESPRESSO)
+        androidTestImplementation(ANDROID_TEST_JUNIT)
+
         //Android Room/DB debug
         debugImplementation(ANDROID_DEBUG)
 
         //Stream Support
         implementation(STREAM_SUPPORT)
 
+        //Lottie support
         implementation(LOTTIE)
     }
-
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.31")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    implementation(project(":data"))
+    implementation(project(":domain"))
 }
