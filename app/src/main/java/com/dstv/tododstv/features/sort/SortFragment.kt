@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.databinding.FragmentSortBinding
 import com.dstv.tododstv.features.common.BaseFragment
-import com.dstv.tododstv.features.task.TaskCallback
+import com.dstv.tododstv.features.common.TaskCallback
 import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +35,7 @@ class SortFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.radioGroup.setOnCheckedChangeListener { _, _ -> callback.onComplete() }
+        binding.radioGroup.setOnCheckedChangeListener { _, _ -> callback.onComplete(false) }
     }
 
 }

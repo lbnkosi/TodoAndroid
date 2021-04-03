@@ -4,9 +4,9 @@ import com.dstv.tododstv.core.models.Task
 
 object TaskMapper {
 
-    fun toPresenter(taskList: ArrayList<com.dstv.domain.model.task.Task>): ArrayList<Task> {
+    fun ArrayList<com.dstv.domain.model.task.Task>.map(): ArrayList<Task> {
         val newList: ArrayList<Task> = arrayListOf()
-        taskList.forEach {
+        forEach {
             newList.add(
                 Task(
                     it.id,

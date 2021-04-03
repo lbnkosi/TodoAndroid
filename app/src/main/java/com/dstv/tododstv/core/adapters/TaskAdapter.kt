@@ -16,7 +16,7 @@ import com.dstv.tododstv.core.util.dialogs.BottomSheetDialogUtilFragment
 import com.dstv.tododstv.databinding.TaskRowBinding
 import com.dstv.tododstv.features.common.BaseFragment
 import com.dstv.tododstv.features.task.AddTaskFragment
-import com.dstv.tododstv.features.task.TaskCallback
+import com.dstv.tododstv.features.common.TaskCallback
 import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
@@ -95,7 +95,9 @@ class TaskAdapter(private val fragmentManager: FragmentManager) : DataBoundListA
         })
     }
 
-    private fun openEditTask(item: Task) = getBottomSheet(AddTaskFragment.newInstance(true, item, this)).show(fragmentManager, AddTaskFragment::class.java.name)
+    private fun openEditTask(item: Task) {
+        getBottomSheet(AddTaskFragment.newInstance(true, item, this)).show(fragmentManager, AddTaskFragment::class.java.name)
+    }
 
     private fun getBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
         bottomSheet = BottomSheetDialogUtilFragment.newInstance(aFragment)
@@ -103,10 +105,11 @@ class TaskAdapter(private val fragmentManager: FragmentManager) : DataBoundListA
     }
 
     private fun dismissBottomSheetDialog() {
+        viewModel.getTasks()
         bottomSheet?.dismiss()
     }
 
-    override fun onComplete() {
+    override fun onComplete(refresh : Boolean) {
         dismissBottomSheetDialog()
     }
 

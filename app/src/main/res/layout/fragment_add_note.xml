@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.dstv.tododstv.features.todo.TodoViewModel" />
+            type="com.dstv.tododstv.features.task.CreateTaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

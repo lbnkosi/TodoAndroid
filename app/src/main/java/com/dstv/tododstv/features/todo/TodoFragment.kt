@@ -10,7 +10,7 @@ import com.dstv.tododstv.features.common.BaseFragment
 import com.dstv.tododstv.features.settings.SettingsFragment
 import com.dstv.tododstv.features.sort.SortFragment
 import com.dstv.tododstv.features.task.AddTaskFragment
-import com.dstv.tododstv.features.task.TaskCallback
+import com.dstv.tododstv.features.common.TaskCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,7 +44,8 @@ class TodoFragment : BaseFragment(), TaskCallback {
         openBottomSheet(fragment).show(childFragmentManager, tag)
     }
 
-    override fun onComplete() {
+    override fun onComplete(refresh: Boolean) {
+        if (refresh) viewModel.getTasks()
         dismissBottomSheet()
     }
 }

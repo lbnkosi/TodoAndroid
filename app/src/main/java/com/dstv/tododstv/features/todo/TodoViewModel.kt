@@ -6,17 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dstv.domain.usecase.TaskUseCase
-import com.dstv.tododstv.core.enums.TaskCategoryEnum
 import com.dstv.tododstv.core.enums.TaskSortEnum
-import com.dstv.tododstv.core.extensions.getDate
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper
+import com.dstv.tododstv.core.mappers.presenter.TaskMapper.map
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
-import com.dstv.tododstv.core.util.CategoryCount
 import com.dstv.tododstv.core.util.CategoryCount.get
 import com.dstv.tododstv.core.util.TaskSort
 import com.dstv.tododstv.features.common.SearchRequest
-import com.dstv.tododstv.features.common.TaskRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -28,27 +25,13 @@ class TodoViewModel @Inject constructor(
     private val useCase: TaskUseCase
 ) : ViewModel() {
 
-    var category: Int = 1
-
-    var task: Task = Task()
-
-    var isEdit: Boolean = false
-
-    var isComplete: Boolean = false
-
     var isMultiSelectEnabled: Boolean = false
-
-    var taskRequest: TaskRequest = TaskRequest()
 
     var searchRequest: SearchRequest = SearchRequest()
 
     var multiSelectTaskList: ArrayList<Task> = arrayListOf()
 
-    val success: LiveData<Boolean> get() = _success
-
     val taskList: LiveData<ArrayList<Task>> get() = _taskList
-
-    val checkedCategory: LiveData<Int> get() = _checkedCategory
 
     val categoryList: LiveData<List<Category>> get() = _categoryList
 
@@ -56,39 +39,13 @@ class TodoViewModel @Inject constructor(
 
     val selectAll: LiveData<Boolean> get() = _selectAll
 
-    private var _checkedCategory: MutableLiveData<Int> = MutableLiveData(1)
-
     private var _selectAll: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    private var _success: MutableLiveData<Boolean> = MutableLiveData()
 
     private var _taskList: MutableLiveData<ArrayList<Task>> = MutableLiveData()
 
     private var _categoryList: MutableLiveData<List<Category>> = MutableLiveData()
 
     private var _taskDeleteList: MutableLiveData<ArrayList<Task>> = MutableLiveData(arrayListOf())
-
-    fun setCategory(taskCat: TaskCategoryEnum) {
-        category = taskCat.id
-        _checkedCategory.value = taskCat.id
-    }
-
-    fun setIsComplete(aIsComplete: Boolean) {
-        isComplete = aIsComplete
-    }
-
-    fun setIsEdit(aEdit: Boolean) {
-        isEdit = aEdit
-    }
-
-    fun setATask(aTask: Task?) {
-        if (aTask != null) {
-            task = aTask
-            configureTask(false)
-        } else {
-            configureTask(true)
-        }
-    }
 
     fun setMultiSelect(isEnabled: Boolean) {
         isMultiSelectEnabled = isEnabled
@@ -100,7 +57,7 @@ class TodoViewModel @Inject constructor(
 
     fun setMultiSelectTaskList(task: Task) {
         if (!multiSelectTaskList.contains(task))
-        multiSelectTaskList.add(task)
+            multiSelectTaskList.add(task)
         _taskDeleteList.value = multiSelectTaskList
     }
 
@@ -114,47 +71,19 @@ class TodoViewModel @Inject constructor(
         _selectAll.value = selectAll.value == false
     }
 
-    private fun configureTask(isNull: Boolean) {
-        isComplete = if (isNull) false else task.isComplete
-        taskRequest.title = if (isNull) "" else task.title
-        taskRequest.note = if (isNull) "" else task.note
-        category = if (isNull) 1 else task.category
-        if (!isNull) _checkedCategory.value = task.category else _checkedCategory.value = 1
-    }
-
-    private fun setTaskList(list: ArrayList<Task>) {
-        _taskList.value = list
-        _categoryList.value = list.get()
-        _success.value = false
-    }
-
     fun sortTask(type: TaskSortEnum) {
-        setTaskList(TaskSort.sortTask(type, _taskList.value!!))
+        TaskSort.sortTasks(type, _taskList.value!!).updateObserver()
     }
 
-    private fun createTask() {
-        viewModelScope.launch {
-            useCase.createTask(TaskMapper.toDomain(task)).collect {
-                _success.value = true
-                setTaskList(TaskMapper.toPresenter(it))
-            }
-        }
+    private fun ArrayList<Task>.updateObserver() {
+        _taskList.value = this
+        _categoryList.value = get()
     }
 
-    private fun updateTask() {
+    fun getTasks() {
         viewModelScope.launch {
-            useCase.updateTask(TaskMapper.toDomain(task)).collect {
-                _success.value = true
-                setTaskList(TaskMapper.toPresenter(it))
-            }
-        }
-    }
-
-    fun deleteTask() {
-        viewModelScope.launch {
-            useCase.deleteTask(TaskMapper.toDomain(task)).collect {
-                _success.value = true
-                setTaskList(TaskMapper.toPresenter(it))
+            useCase.getTasks().collect {
+                it.map().updateObserver()
             }
         }
     }
@@ -162,18 +91,16 @@ class TodoViewModel @Inject constructor(
     fun deleteSelectedTasks() {
         viewModelScope.launch {
             useCase.deleteTasks(TaskMapper.toDomain(multiSelectTaskList)).collect {
-                _success.value = true
-                setTaskList(TaskMapper.toPresenter(it))
+                it.map().updateObserver()
             }
             _selectAll.value = false
         }
     }
 
-    fun deleteAllTasks() {
+    fun searchTasks() {
         viewModelScope.launch {
-            useCase.deleteAllTasks().collect {
-                _success.value = true
-                setTaskList(TaskMapper.toPresenter(it))
+            useCase.searchTasks(searchRequest.keyword).collect {
+                it.map().updateObserver()
             }
         }
     }
@@ -184,36 +111,6 @@ class TodoViewModel @Inject constructor(
                 searchTasks()
             }
         })
-    }
-
-    fun searchTasks() {
-        viewModelScope.launch {
-            useCase.searchTasks(searchRequest.keyword).collect {
-                _success.value = true
-                setTaskList(TaskMapper.toPresenter(it))
-            }
-        }
-    }
-
-    private fun getTasks() {
-        viewModelScope.launch {
-            useCase.getTasks().collect {
-                setTaskList(TaskMapper.toPresenter(it))
-            }
-        }
-    }
-
-    fun createTaskModel() {
-        if (taskRequest.isRequestValid()) {
-            val currentTime = getDate()
-            if (!isEdit) {
-                task = Task(id = 0, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateCreated = currentTime, dateUpdated = currentTime)
-                createTask()
-            } else {
-                task = Task(id = task.id, title = taskRequest.title, note = taskRequest.note, isComplete = isComplete, category = category, dateUpdated = currentTime, dateCreated = task.dateCreated)
-                updateTask()
-            }
-        }
     }
 
     init {

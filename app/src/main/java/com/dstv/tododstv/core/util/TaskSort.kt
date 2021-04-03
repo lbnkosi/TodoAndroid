@@ -6,7 +6,7 @@ import com.dstv.tododstv.core.models.Task
 
 object TaskSort {
 
-    fun sortTask(type: TaskSortEnum, taskList: ArrayList<Task>): ArrayList<Task> {
+    fun sortTasks(type: TaskSortEnum, taskList: ArrayList<Task>): ArrayList<Task> {
         if (taskList.isEmpty()) return arrayListOf()
         return when (type) {
             CATEGORY -> sortByCategory(taskList)

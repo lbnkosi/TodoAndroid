@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.databinding.FragmentSettingsBinding
 import com.dstv.tododstv.features.common.BaseFragment
-import com.dstv.tododstv.features.task.TaskCallback
+import com.dstv.tododstv.features.common.TaskCallback
 import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +18,7 @@ class SettingsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSettingsBinding
 
-    private val viewModel: TodoViewModel by activityViewModels()
+    private val viewModel: SettingsViewModel by activityViewModels()
 
     companion object {
         fun newInstance(aCallback: TaskCallback) = SettingsFragment().apply {

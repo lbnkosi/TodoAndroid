@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.databinding.FragmentAddNoteBinding
 import com.dstv.tododstv.features.common.BaseFragment
+import com.dstv.tododstv.features.common.TaskCallback
 import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +19,7 @@ class AddTaskFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAddNoteBinding
 
-    private val viewModel: TodoViewModel by activityViewModels()
+    private val viewModel: CreateTaskViewModel by activityViewModels()
 
     companion object {
 
@@ -56,6 +57,10 @@ class AddTaskFragment : BaseFragment() {
     }
 
     private fun onComplete() {
-        viewModel.success.observe(viewLifecycleOwner, { if (it) callback.onComplete() })
+        viewModel.success.observe(viewLifecycleOwner, {
+            if (it) {
+                callback.onComplete()
+            }
+        })
     }
 }
