@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment() {
 
-    private var callback: TaskCallback? = null
+    private lateinit var callback: TaskCallback
 
     private lateinit var binding: FragmentSettingsBinding
 
@@ -26,7 +26,7 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSettingsBinding.inflate(inflater)
         return binding.root
     }
@@ -35,7 +35,7 @@ class SettingsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.deleteAll.setOnClickListener {
             viewModel.deleteAllTasks()
-            callback?.onComplete()
+            callback.onComplete()
         }
     }
 

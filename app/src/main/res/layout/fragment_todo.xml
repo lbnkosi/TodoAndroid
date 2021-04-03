@@ -17,6 +17,7 @@
         <variable
             name="fragmentManager"
             type="androidx.fragment.app.FragmentManager" />
+
     </data>
 
     <ScrollView

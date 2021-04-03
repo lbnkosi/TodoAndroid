@@ -13,6 +13,7 @@ import com.dstv.tododstv.core.mappers.presenter.TaskMapper
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.core.util.CategoryCount
+import com.dstv.tododstv.core.util.CategoryCount.get
 import com.dstv.tododstv.core.util.TaskSort
 import com.dstv.tododstv.features.common.SearchRequest
 import com.dstv.tododstv.features.common.TaskRequest
@@ -123,7 +124,7 @@ class TodoViewModel @Inject constructor(
 
     private fun setTaskList(list: ArrayList<Task>) {
         _taskList.value = list
-        _categoryList.value = CategoryCount.get(list)
+        _categoryList.value = list.get()
         _success.value = false
     }
 
@@ -219,5 +220,4 @@ class TodoViewModel @Inject constructor(
         getTasks()
         observeSearchKeyword()
     }
-
 }

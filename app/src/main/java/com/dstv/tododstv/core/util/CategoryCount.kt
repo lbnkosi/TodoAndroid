@@ -1,79 +1,107 @@
 package com.dstv.tododstv.core.util
 
 import com.dstv.tododstv.core.enums.TaskCategoryEnum.*
+import com.dstv.tododstv.core.extensions.sortedCategory
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
 
 object CategoryCount {
 
-    private var one: Int = 0
-    private var two: Int = 0
-    private var three: Int = 0
-    private var four: Int = 0
-    private var five: Int = 0
+    private var category1TotalCount = 0
 
-    private var catOneComplete: Int = 0
-    private var catTwoComplete: Int = 0
-    private var catThreeComplete: Int = 0
-    private var catFourComplete: Int = 0
-    private var catFiveComplete: Int = 0
+    private var category2TotalCount = 0
 
-    fun get(taskList: ArrayList<Task>): List<Category> {
+    private var category3TotalCount = 0
+
+    private var category4TotalCount = 0
+
+    private var category5TotalCount = 0
+
+    private var category1CompletedCount = 0
+
+    private var category2CompletedCount = 0
+
+    private var category3CompletedCount = 0
+
+    private var category4CompletedCount = 0
+
+    private var category6CompletedCount = 0
+
+    private var categoryCountList: ArrayList<Category> = arrayListOf()
+
+    fun ArrayList<Task>.get(): List<Category> {
         resetCounts()
-        val categoryList: ArrayList<Category> = arrayListOf()
-        taskList.forEach {
+        this.count()
+        addCategoriesToList()
+        return categoryCountList.sortedCategory()
+    }
+
+    private fun resetCounts() {
+        resetTotalCount()
+        resetCompletedCount()
+        categoryCountList = arrayListOf()
+    }
+
+    private fun ArrayList<Task>.count() {
+        forEach {
             when (it.category) {
-                1 -> categoryOne(it)
-                2 -> categoryTwo(it)
-                3 -> categoryThree(it)
-                4 -> categoryFour(it)
-                5 -> categoryFive(it)
+                CATEGORY_1.id -> it.category1()
+                CATEGORY_2.id -> it.category2()
+                CATEGORY_3.id -> it.category3()
+                CATEGORY_4.id -> it.category4()
+                CATEGORY_5.id -> it.category5()
             }
         }
-        categoryList.add(Category(title = CATEGORY_ONE.defaultName, count = one, complete = catOneComplete))
-        categoryList.add(Category(title = CATEGORY_TWO.defaultName, count = two, complete = catTwoComplete))
-        categoryList.add(Category(title = CATEGORY_THREE.defaultName, count = three, complete = catThreeComplete))
-        categoryList.add(Category(title = CATEGORY_FOUR.defaultName, count = four, complete = catFourComplete))
-        categoryList.add(Category(title = CATEGORY_FIVE.defaultName, count = five, complete = catFiveComplete))
-        return categoryList.sortedWith(compareBy { it.count }).reversed()
     }
 
-    private fun resetCounts(){
-        one = 0
-        two = 0
-        three = 0
-        four = 0
-        five = 0
-
-        catOneComplete = 0
-        catTwoComplete = 0
-        catThreeComplete = 0
-        catFourComplete = 0
-        catFiveComplete = 0
+    private fun addCategoriesToList() {
+        categoryCountList.run {
+            add(Category(CATEGORY_1.defaultName, category1TotalCount, category1CompletedCount))
+            add(Category(CATEGORY_2.defaultName, category2TotalCount, category2CompletedCount))
+            add(Category(CATEGORY_3.defaultName, category3TotalCount, category3CompletedCount))
+            add(Category(CATEGORY_4.defaultName, category4TotalCount, category4CompletedCount))
+            add(Category(CATEGORY_5.defaultName, category5TotalCount, category6CompletedCount))
+        }
     }
 
-    private fun categoryOne(task: Task) {
-        if (task.isComplete) catOneComplete++
-        one++
+    private fun resetTotalCount() {
+        category1TotalCount = 0
+        category2TotalCount = 0
+        category3TotalCount = 0
+        category4TotalCount = 0
+        category5TotalCount = 0
     }
 
-    private fun categoryTwo(task: Task) {
-        if (task.isComplete) catTwoComplete++
-        two++
+    private fun resetCompletedCount() {
+        category1CompletedCount = 0
+        category2CompletedCount = 0
+        category3CompletedCount = 0
+        category4CompletedCount = 0
+        category6CompletedCount = 0
     }
 
-    private fun categoryThree(task: Task) {
-        if (task.isComplete) catThreeComplete++
-        three++
+    private fun Task.category1() {
+        if (isComplete) category1CompletedCount++
+        category1TotalCount++
     }
 
-    private fun categoryFour(task: Task) {
-        if (task.isComplete) catFourComplete++
-        four++
+    private fun Task.category2() {
+        if (isComplete) category2CompletedCount++
+        category2TotalCount++
     }
 
-    private fun categoryFive(task: Task) {
-        if (task.isComplete) catFiveComplete++
-        five++
+    private fun Task.category3() {
+        if (isComplete) category3CompletedCount++
+        category3TotalCount++
+    }
+
+    private fun Task.category4() {
+        if (isComplete) category4CompletedCount++
+        category4TotalCount++
+    }
+
+    private fun Task.category5() {
+        if (isComplete) category6CompletedCount++
+        category5TotalCount++
     }
 }

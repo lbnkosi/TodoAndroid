@@ -12,16 +12,16 @@ import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentSortTasks : BaseFragment() {
+class SortFragment : BaseFragment() {
 
-    private var callback: TaskCallback? = null
+    private lateinit var callback: TaskCallback
 
     private lateinit var binding: FragmentSortBinding
 
     private val viewModel: TodoViewModel by activityViewModels()
 
     companion object {
-        fun newInstance(aCallback: TaskCallback) = FragmentSortTasks().apply {
+        fun newInstance(aCallback: TaskCallback) = SortFragment().apply {
             callback = aCallback
         }
     }
@@ -35,7 +35,7 @@ class FragmentSortTasks : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.radioGroup.setOnCheckedChangeListener { _, _ -> callback?.onComplete() }
+        binding.radioGroup.setOnCheckedChangeListener { _, _ -> callback.onComplete() }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.dstv.tododstv.core.databinding
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -11,6 +12,7 @@ import com.dstv.tododstv.core.adapters.CategoryAdapter
 import com.dstv.tododstv.core.adapters.TaskAdapter
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
+import com.dstv.tododstv.features.common.BaseFragment
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 

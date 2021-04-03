@@ -15,9 +15,7 @@ class CategoryAdapter : DataBoundListAdapter<Category, CategoryProgressRowBindin
     override fun createBinding(parent: ViewGroup?) = CategoryProgressRowBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
 
     override fun bind(binding: CategoryProgressRowBinding, item: Category) {
-        val display = CategoryDisplayMapper().toCategoryDisplay(item)
-        binding.categoryDisplay = display
-        binding.progress.setProgressCompat(display.complete, true)
+        binding.categoryDisplay = CategoryDisplayMapper().toCategoryDisplay(item)
     }
 
     override fun areItemsTheSame(oldItem: Category, newItem: Category) = newItem == oldItem

@@ -2,21 +2,20 @@ package com.dstv.tododstv.features.common
 
 import androidx.fragment.app.Fragment
 import com.dstv.tododstv.core.util.dialogs.BottomSheetDialogUtilFragment
-import com.dstv.tododstv.core.util.dialogs.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
-    private var mBottomSheetDialogUtilFragment: BottomSheetDialogUtilFragment? = null
+    private lateinit var bottomSheetUtil: BottomSheetDialogUtilFragment
 
-    open fun getBottomSheet(aFragment: BaseFragment?): BottomSheetDialogUtilFragment? {
-        mBottomSheetDialogUtilFragment = BottomSheetDialogUtilFragment.newInstance(aFragment!!)
-        return mBottomSheetDialogUtilFragment
+    open fun openBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
+        bottomSheetUtil = BottomSheetDialogUtilFragment.newInstance(aFragment)
+        return bottomSheetUtil
     }
 
     fun dismissBottomSheet() {
-        mBottomSheetDialogUtilFragment?.dismiss()
+        bottomSheetUtil.dismiss()
     }
 
 }

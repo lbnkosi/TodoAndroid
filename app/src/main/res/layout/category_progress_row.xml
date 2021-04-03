@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 tools:progress="60"
+                android:progress="@{categoryDisplay.complete}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/completeText"
                 app:indicatorColor="@color/dark_violet"

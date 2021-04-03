@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@{viewModel.checkedCategory == 1? true: false}"
-                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_ONE)}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_1)}"
                 android:text="Personal" />
 
             <com.google.android.material.chip.Chip
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@{viewModel.checkedCategory == 2? true: false}"
-                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_TWO)}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_2)}"
                 android:text="Business" />
 
             <com.google.android.material.chip.Chip
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@{viewModel.checkedCategory == 3? true: false}"
-                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_THREE)}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_3)}"
                 android:text="Work" />
 
             <com.google.android.material.chip.Chip
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@{viewModel.checkedCategory == 4? true: false}"
-                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_FOUR)}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_4)}"
                 android:text="School" />
 
             <com.google.android.material.chip.Chip
@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@{viewModel.checkedCategory == 5? true: false}"
-                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_FIVE)}"
+                android:onClick="@{() -> viewModel.setCategory(TaskCategoryEnum.CATEGORY_5)}"
                 android:text="Other" />
 
         </com.google.android.material.chip.ChipGroup>

@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AddTaskFragment : BaseFragment() {
 
-    private var callback: TaskCallback? = null
+    private lateinit var callback: TaskCallback
 
     private lateinit var binding: FragmentAddNoteBinding
 
@@ -56,8 +56,6 @@ class AddTaskFragment : BaseFragment() {
     }
 
     private fun onComplete() {
-        viewModel.success.observe(viewLifecycleOwner, {
-            if (it) callback?.onComplete()
-        })
+        viewModel.success.observe(viewLifecycleOwner, { if (it) callback.onComplete() })
     }
 }
