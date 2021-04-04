@@ -18,8 +18,4 @@ object TaskStatus {
         }
     }
 
-    fun getCategoryId(taskCategoryEnum: TaskCategoryEnum): Int {
-        return taskCategoryEnum.colour
-    }
-
 }

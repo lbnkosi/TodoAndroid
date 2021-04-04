@@ -11,9 +11,9 @@ class TaskDisplayMapper {
 
     private val taskDisplayMapper = Function<Task, TaskDisplay> {
         TaskDisplay().apply {
-            title = it.title
             taskStatusBg = TaskStatus.get(it.isComplete, it.category)
             taskDateUpdated = it.dateUpdated
+            title = it.title
         }
     }
 

@@ -1,4 +1,4 @@
-package com.dstv.domain.model.task
+package com.dstv.domain.model
 
 data class Task(
     var id: Int = 0,

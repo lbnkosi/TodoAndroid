@@ -1,14 +1,10 @@
 package com.dstv.domain.usecase
 
-import com.dstv.domain.model.task.Task
+import com.dstv.domain.model.Task
 import com.dstv.domain.repository.ITaskRepository
 import javax.inject.Inject
 
-class TaskUseCase @Inject constructor(
-    private val repository: ITaskRepository
-) {
-    suspend fun getTask() = repository.getTask()
-
+class TaskUseCase @Inject constructor(private val repository: ITaskRepository) {
     suspend fun getTasks() = repository.getTasks()
 
     suspend fun createTask(task: Task) = repository.createTask(task)

@@ -1,4 +1,4 @@
-package com.dstv.tododstv.core.util
+package com.dstv.tododstv.core.util.recyclerview
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

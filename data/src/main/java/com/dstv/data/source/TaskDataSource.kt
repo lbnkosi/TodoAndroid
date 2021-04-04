@@ -1,23 +1,14 @@
 package com.dstv.data.source
 
 import com.dstv.data.db.TaskDao
-import com.dstv.data.mappers.TaskMapper
-import com.dstv.data.model.entity.TaskEntity
-import com.dstv.domain.model.task.Task
+import com.dstv.data.entity.TaskEntity
+import com.dstv.data.mappers.map
+import com.dstv.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class TaskDataSource @Inject constructor(
-    private val taskDao: TaskDao
-) {
-
-    /**
-     * Get one task from the db
-     */
-    suspend fun getTask(): Flow<TaskEntity> {
-        return flow { emit(TaskEntity()) }
-    }
+class TaskDataSource @Inject constructor(private val taskDao: TaskDao) {
 
     /**
      * Get all tasks from the db
@@ -31,7 +22,7 @@ class TaskDataSource @Inject constructor(
      * Create and store task to the db
      */
     suspend fun createTask(task: Task): Flow<ArrayList<TaskEntity>> {
-        taskDao.createTask(TaskMapper.toEntity(task))
+        taskDao.createTask(task.map())
         return flow { emit(taskDao.getTasks() as ArrayList<TaskEntity>) }
     }
 
@@ -39,7 +30,7 @@ class TaskDataSource @Inject constructor(
      * Get task from db and update it
      */
     suspend fun updateTask(task: Task): Flow<ArrayList<TaskEntity>> {
-        taskDao.updateTask(TaskMapper.toEntity(task))
+        taskDao.updateTask(task.map())
         return flow { emit(taskDao.getTasks() as ArrayList<TaskEntity>) }
     }
 
@@ -67,16 +58,14 @@ class TaskDataSource @Inject constructor(
         return flow { emit(taskDao.getTasks() as ArrayList<TaskEntity>) }
     }
 
+    /**
+     * Search for tasks containing a keyword in the db
+     */
     suspend fun searchTask(keywords: String): Flow<ArrayList<TaskEntity>> {
-        if (keywords.isEmpty()) {
-            return flow { emit(taskDao.getTasks() as ArrayList<TaskEntity>) }
+        return if (keywords.isEmpty()) {
+            flow { emit(taskDao.getTasks() as ArrayList<TaskEntity>) }
         } else {
-            val tasks = taskDao.getTasks() as ArrayList<TaskEntity>
-            val searchFilter: ArrayList<TaskEntity> = arrayListOf()
-            tasks.forEach {
-                if (it.title.contains(keywords, ignoreCase = true)) searchFilter.add(it)
-            }
-            return flow { emit(searchFilter) }
+            flow { emit(taskDao.getTasks().filter { it.title.contains(keywords, true) } as ArrayList<TaskEntity>) }
         }
     }
 }

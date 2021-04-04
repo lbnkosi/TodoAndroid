@@ -1,4 +1,4 @@
-package com.dstv.data.model.entity
+package com.dstv.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -8,6 +8,8 @@ import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.databinding.FragmentManageTaskBinding
 import com.dstv.tododstv.features.common.BaseFragment
+import com.dstv.tododstv.features.common.Constants.IS_EDIT
+import com.dstv.tododstv.features.common.Constants.TASK
 import com.dstv.tododstv.features.common.TaskCallback
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,11 +23,6 @@ class ManageTaskFragment : BaseFragment() {
     private val viewModel: ManageTaskViewModel by activityViewModels()
 
     companion object {
-
-        private const val IS_EDIT = "IS_EDIT"
-
-        private const val TASK = "TASK"
-
         fun newInstance(isEdit: Boolean = false, task: Task? = Task(), aCallback: TaskCallback) = ManageTaskFragment().apply {
             callback = aCallback
             arguments = Bundle().apply {
@@ -57,9 +54,7 @@ class ManageTaskFragment : BaseFragment() {
 
     private fun onComplete() {
         viewModel.success.observe(viewLifecycleOwner, {
-            if (it) {
-                callback.onComplete()
-            }
+            if (it) callback.onComplete()
         })
     }
 }

@@ -35,13 +35,9 @@ class TodoFragment : BaseFragment(), TaskCallback {
 
     private fun configureOnClicks() {
         binding.showHideStats.setOnClickListener { binding.show = !binding.show!! }
-        binding.sort.setOnClickListener { openBottomSheet(SortFragment.newInstance(this), SortFragment::class.java.name) }
-        binding.settingsIcon.setOnClickListener { openBottomSheet(SettingsFragment.newInstance(this), SettingsFragment::class.java.name) }
-        binding.fab.setOnClickListener { openBottomSheet(ManageTaskFragment.newInstance(false, null, this), ManageTaskFragment::class.java.name) }
-    }
-
-    private fun openBottomSheet(fragment: BaseFragment, tag: String) {
-        openBottomSheet(fragment).show(childFragmentManager, tag)
+        binding.sort.setOnClickListener { show(SortFragment.newInstance(this)) }
+        binding.settingsIcon.setOnClickListener { show(SettingsFragment.newInstance(this)) }
+        binding.fab.setOnClickListener { show(ManageTaskFragment.newInstance(false, null, this)) }
     }
 
     override fun onComplete(refresh: Boolean) {

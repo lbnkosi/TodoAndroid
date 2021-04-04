@@ -1,4 +1,4 @@
-package com.dstv.tododstv.core.util
+package com.dstv.tododstv.core.util.recyclerview
 
 import android.annotation.SuppressLint
 import android.os.AsyncTask
@@ -90,7 +90,7 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding?> : RecyclerView.Adap
         getBottomSheet(baseFragment).show(fragmentManager, baseFragment::class.java.name)
     }
 
-    protected fun getBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
+    private fun getBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
         bottomSheet = BottomSheetDialogUtilFragment.newInstance(aFragment)
         return bottomSheet!!
     }

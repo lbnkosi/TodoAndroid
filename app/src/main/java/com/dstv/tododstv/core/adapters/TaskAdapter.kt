@@ -9,7 +9,7 @@ import com.dstv.tododstv.core.enums.MultiSelectEnum.*
 import com.dstv.tododstv.core.extensions.*
 import com.dstv.tododstv.core.mappers.display.TaskDisplayMapper
 import com.dstv.tododstv.core.models.Task
-import com.dstv.tododstv.core.util.DataBoundListAdapter
+import com.dstv.tododstv.core.util.recyclerview.DataBoundListAdapter
 import com.dstv.tododstv.databinding.TaskRowBinding
 import com.dstv.tododstv.features.common.TaskCallback
 import com.dstv.tododstv.features.todo.TodoViewModel

@@ -9,7 +9,11 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var bottomSheetUtil: BottomSheetDialogUtilFragment
 
-    open fun openBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
+    fun show(aFragment: BaseFragment) {
+        openBottomSheet(aFragment).show(childFragmentManager, aFragment::class.java.name)
+    }
+
+    fun openBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
         bottomSheetUtil = BottomSheetDialogUtilFragment.newInstance(aFragment)
         return bottomSheetUtil
     }

@@ -9,6 +9,7 @@ import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskSortEnum
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper.map
+import com.dstv.tododstv.core.mappers.presenter.TaskMapper.toDomain
 import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.core.util.CategoryCount.get
@@ -84,7 +85,7 @@ class TodoViewModel @Inject constructor(
 
     fun deleteSelectedTasks() {
         viewModelScope.launch {
-            useCase.deleteTasks(TaskMapper.toDomain(toDeleteList)).collect {
+            useCase.deleteTasks(toDeleteList.toDomain()).collect {
                 it.map().updateObserver()
             }
             _selectAll.value = false

@@ -8,6 +8,8 @@ import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskCategoryEnum
 import com.dstv.tododstv.core.extensions.getDate
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper
+import com.dstv.tododstv.core.mappers.presenter.TaskMapper.map
+import com.dstv.tododstv.core.mappers.presenter.TaskMapper.toDomain
 import com.dstv.tododstv.core.models.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -83,21 +85,21 @@ class ManageTaskViewModel @Inject constructor(
     //Store a task entity in the db
     private fun createTask() {
         viewModelScope.launch {
-            useCase.createTask(TaskMapper.toDomain(task)).collect { onSuccess() }
+            useCase.createTask(task.map()).collect { onSuccess() }
         }
     }
 
     //Update a task entity in the db
     private fun updateTask() {
         viewModelScope.launch {
-            useCase.updateTask(TaskMapper.toDomain(task)).collect { onSuccess() }
+            useCase.updateTask(task.map()).collect { onSuccess() }
         }
     }
 
     //Delete a task entity from the db
     fun deleteTask() {
         viewModelScope.launch {
-            useCase.deleteTask(TaskMapper.toDomain(task)).collect { onSuccess() }
+            useCase.deleteTask(task.map()).collect { onSuccess() }
         }
     }
 

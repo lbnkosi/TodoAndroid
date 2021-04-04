@@ -1,34 +1,31 @@
 package com.dstv.data.db
 
 import androidx.room.*
-import com.dstv.data.model.entity.TaskEntity
+import com.dstv.data.entity.TaskEntity
 
 @Dao
 interface TaskDao {
-
-    //Get Task(s)
+    //Get tasks
     @Query("SELECT * FROM Tasks")
     suspend fun getTasks(): List<TaskEntity>
 
+    //Get task
     @Query("SELECT * FROM Tasks WHERE id=:id")
     suspend fun getTask(id: Int): TaskEntity
 
-    //Create Tasks
+    //Create task
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createTask(taskEntity: TaskEntity)
 
-    //Update Task
+    //Update task
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateTask(taskEntity: TaskEntity)
 
-    //Delete Task(s)
+    //Delete all tasks
     @Query("DELETE FROM Tasks")
     suspend fun deleteAllTasks()
 
+    //Delete task
     @Query("DELETE FROM Tasks WHERE id=:id")
     suspend fun deleteTask(id: Int)
-
-    //Get Available Task Count
-    @Query("SELECT COUNT(*) FROM Tasks")
-    suspend fun tasksAvailable(): Int
 }
