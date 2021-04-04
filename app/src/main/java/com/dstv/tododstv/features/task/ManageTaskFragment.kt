@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.core.models.Task
-import com.dstv.tododstv.databinding.FragmentAddNoteBinding
+import com.dstv.tododstv.databinding.FragmentManageTaskBinding
 import com.dstv.tododstv.features.common.BaseFragment
 import com.dstv.tododstv.features.common.TaskCallback
-import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddTaskFragment : BaseFragment() {
+class ManageTaskFragment : BaseFragment() {
 
     private lateinit var callback: TaskCallback
 
-    private lateinit var binding: FragmentAddNoteBinding
+    private lateinit var binding: FragmentManageTaskBinding
 
-    private val viewModel: CreateTaskViewModel by activityViewModels()
+    private val viewModel: ManageTaskViewModel by activityViewModels()
 
     companion object {
 
@@ -27,7 +26,7 @@ class AddTaskFragment : BaseFragment() {
 
         private const val TASK = "TASK"
 
-        fun newInstance(isEdit: Boolean = false, task: Task? = Task(), aCallback: TaskCallback) = AddTaskFragment().apply {
+        fun newInstance(isEdit: Boolean = false, task: Task? = Task(), aCallback: TaskCallback) = ManageTaskFragment().apply {
             callback = aCallback
             arguments = Bundle().apply {
                 putBoolean(IS_EDIT, isEdit)
@@ -37,7 +36,7 @@ class AddTaskFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentAddNoteBinding.inflate(inflater)
+        binding = FragmentManageTaskBinding.inflate(inflater)
         return binding.root
     }
 

@@ -18,8 +18,4 @@ class CategoryAdapter : DataBoundListAdapter<Category, CategoryProgressRowBindin
         binding.categoryDisplay = CategoryDisplayMapper().toCategoryDisplay(item)
     }
 
-    override fun areItemsTheSame(oldItem: Category, newItem: Category) = newItem == oldItem
-
-    override fun areContentsTheSame(oldItem: Category, newItem: Category) = newItem.title == oldItem.title
-
 }

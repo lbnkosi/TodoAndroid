@@ -9,7 +9,7 @@ import com.dstv.tododstv.databinding.FragmentTodoBinding
 import com.dstv.tododstv.features.common.BaseFragment
 import com.dstv.tododstv.features.settings.SettingsFragment
 import com.dstv.tododstv.features.sort.SortFragment
-import com.dstv.tododstv.features.task.AddTaskFragment
+import com.dstv.tododstv.features.task.ManageTaskFragment
 import com.dstv.tododstv.features.common.TaskCallback
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +37,7 @@ class TodoFragment : BaseFragment(), TaskCallback {
         binding.showHideStats.setOnClickListener { binding.show = !binding.show!! }
         binding.sort.setOnClickListener { openBottomSheet(SortFragment.newInstance(this), SortFragment::class.java.name) }
         binding.settingsIcon.setOnClickListener { openBottomSheet(SettingsFragment.newInstance(this), SettingsFragment::class.java.name) }
-        binding.fab.setOnClickListener { openBottomSheet(AddTaskFragment.newInstance(false, null, this), AddTaskFragment::class.java.name) }
+        binding.fab.setOnClickListener { openBottomSheet(ManageTaskFragment.newInstance(false, null, this), ManageTaskFragment::class.java.name) }
     }
 
     private fun openBottomSheet(fragment: BaseFragment, tag: String) {

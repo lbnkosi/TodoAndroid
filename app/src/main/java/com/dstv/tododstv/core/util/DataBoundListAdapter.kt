@@ -5,15 +5,20 @@ import android.os.AsyncTask
 import android.view.ViewGroup
 import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DiffUtil.DiffResult
 import androidx.recyclerview.widget.RecyclerView
+import com.dstv.tododstv.core.util.dialogs.BottomSheetDialogUtilFragment
+import com.dstv.tododstv.features.common.BaseFragment
 
 abstract class DataBoundListAdapter<T, V : ViewDataBinding?> : RecyclerView.Adapter<DataBoundViewHolder<V>>() {
 
     private var dataVersion = 0
 
     private var items: List<T>? = null
+
+    private var bottomSheet: BottomSheetDialogUtilFragment? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DataBoundViewHolder(createBinding(parent))
 
@@ -75,9 +80,22 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding?> : RecyclerView.Adap
 
     protected abstract fun bind(binding: V, item: T)
 
-    protected abstract fun areItemsTheSame(oldItem: T, newItem: T): Boolean
+    protected fun areItemsTheSame(oldItem: T, newItem: T): Boolean = newItem == oldItem
 
-    protected abstract fun areContentsTheSame(oldItem: T, newItem: T): Boolean
+    protected fun areContentsTheSame(oldItem: T, newItem: T): Boolean = newItem == oldItem
 
     override fun getItemCount() = if (items == null) 0 else items!!.size
+
+    protected fun showBottomSheet(baseFragment: BaseFragment, fragmentManager: FragmentManager) {
+        getBottomSheet(baseFragment).show(fragmentManager, baseFragment::class.java.name)
+    }
+
+    protected fun getBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
+        bottomSheet = BottomSheetDialogUtilFragment.newInstance(aFragment)
+        return bottomSheet!!
+    }
+
+    protected fun dismissBottomSheetDialog() {
+        bottomSheet?.dismiss()
+    }
 }

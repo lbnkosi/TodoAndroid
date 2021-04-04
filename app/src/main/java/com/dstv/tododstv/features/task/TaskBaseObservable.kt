@@ -1,10 +1,10 @@
-package com.dstv.tododstv.features.common
+package com.dstv.tododstv.features.task
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.dstv.tododstv.BR
 
-class TaskRequest(private var _title: String = "", private var _note: String = "") : BaseObservable() {
+class TaskBaseObservable(private var _title: String = "", private var _note: String = "") : BaseObservable() {
 
     var title: String
         @Bindable get() = _title

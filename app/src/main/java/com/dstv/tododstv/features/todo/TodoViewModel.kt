@@ -13,7 +13,6 @@ import com.dstv.tododstv.core.models.Category
 import com.dstv.tododstv.core.models.Task
 import com.dstv.tododstv.core.util.CategoryCount.get
 import com.dstv.tododstv.core.util.TaskSort
-import com.dstv.tododstv.features.common.SearchRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,11 +24,11 @@ class TodoViewModel @Inject constructor(
     private val useCase: TaskUseCase
 ) : ViewModel() {
 
-    var isMultiSelectEnabled: Boolean = false
+    var multiSelectEnabled: Boolean = false
 
-    var searchRequest: SearchRequest = SearchRequest()
+    var toDeleteList: ArrayList<Task> = arrayListOf()
 
-    var multiSelectTaskList: ArrayList<Task> = arrayListOf()
+    val selectAll: LiveData<Boolean> get() = _selectAll
 
     val taskList: LiveData<ArrayList<Task>> get() = _taskList
 
@@ -37,34 +36,29 @@ class TodoViewModel @Inject constructor(
 
     val taskDeleteList: LiveData<ArrayList<Task>> get() = _taskDeleteList
 
-    val selectAll: LiveData<Boolean> get() = _selectAll
-
-    private var _selectAll: MutableLiveData<Boolean> = MutableLiveData(false)
+    var searchBaseObservable: SearchBaseObservable = SearchBaseObservable()
 
     private var _taskList: MutableLiveData<ArrayList<Task>> = MutableLiveData()
 
     private var _categoryList: MutableLiveData<List<Category>> = MutableLiveData()
 
+    private var _selectAll: MutableLiveData<Boolean> = MutableLiveData(false)
+
     private var _taskDeleteList: MutableLiveData<ArrayList<Task>> = MutableLiveData(arrayListOf())
 
-    fun setMultiSelect(isEnabled: Boolean) {
-        isMultiSelectEnabled = isEnabled
+    fun addRemoveFromDeleteList(isSelected: Boolean, task: Task) {
+        if (isSelected) addToDeleteList(task) else removeFromDeleteList(task)
     }
 
-    fun getMultiSelectIsEnabled(): Boolean {
-        return isMultiSelectEnabled
+    private fun addToDeleteList(task: Task) {
+        if (!toDeleteList.contains(task)) toDeleteList.add(task)
+        _taskDeleteList.value = toDeleteList
     }
 
-    fun setMultiSelectTaskList(task: Task) {
-        if (!multiSelectTaskList.contains(task))
-            multiSelectTaskList.add(task)
-        _taskDeleteList.value = multiSelectTaskList
-    }
-
-    fun removeFromSelectedList(task: Task) {
-        multiSelectTaskList.remove(task)
-        _taskDeleteList.value = multiSelectTaskList
-        if (multiSelectTaskList.isEmpty()) isMultiSelectEnabled = false
+    private fun removeFromDeleteList(task: Task) {
+        toDeleteList.remove(task)
+        _taskDeleteList.value = toDeleteList
+        if (toDeleteList.isEmpty()) multiSelectEnabled = false
     }
 
     fun setSelectAll() {
@@ -90,7 +84,7 @@ class TodoViewModel @Inject constructor(
 
     fun deleteSelectedTasks() {
         viewModelScope.launch {
-            useCase.deleteTasks(TaskMapper.toDomain(multiSelectTaskList)).collect {
+            useCase.deleteTasks(TaskMapper.toDomain(toDeleteList)).collect {
                 it.map().updateObserver()
             }
             _selectAll.value = false
@@ -99,14 +93,14 @@ class TodoViewModel @Inject constructor(
 
     fun searchTasks() {
         viewModelScope.launch {
-            useCase.searchTasks(searchRequest.keyword).collect {
+            useCase.searchTasks(searchBaseObservable.keyword).collect {
                 it.map().updateObserver()
             }
         }
     }
 
     private fun observeSearchKeyword() {
-        searchRequest.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+        searchBaseObservable.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 searchTasks()
             }

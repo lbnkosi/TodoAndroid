@@ -8,16 +8,14 @@ import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskCategoryEnum
 import com.dstv.tododstv.core.extensions.getDate
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper
-import com.dstv.tododstv.core.mappers.presenter.TaskMapper.map
 import com.dstv.tododstv.core.models.Task
-import com.dstv.tododstv.features.common.TaskRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateTaskViewModel @Inject constructor(
+class ManageTaskViewModel @Inject constructor(
     private val useCase: TaskUseCase
 ): ViewModel() {
 
@@ -29,11 +27,11 @@ class CreateTaskViewModel @Inject constructor(
 
     var isComplete: Boolean = false
 
-    var taskRequest: TaskRequest = TaskRequest()
-
     val success: LiveData<Boolean> get() = _success
 
     val checkedCategory: LiveData<Int> get() = _checkedCategory
+
+    var taskBaseObservable: TaskBaseObservable = TaskBaseObservable()
 
     private var _success: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -63,16 +61,16 @@ class CreateTaskViewModel @Inject constructor(
 
     private fun Boolean.configureTask() {
         isComplete = if (this) false else task.isComplete
-        taskRequest.title = if (this) "" else task.title
-        taskRequest.note = if (this) "" else task.note
+        taskBaseObservable.title = if (this) "" else task.title
+        taskBaseObservable.note = if (this) "" else task.note
         category = if (this) 1 else task.category
         if (!this) _checkedCategory.value = task.category else _checkedCategory.value = 1
     }
 
     fun createTaskModel() {
-        if (taskRequest.isRequestValid()) {
+        if (taskBaseObservable.isRequestValid()) {
             val currentTime = getDate()
-            task = Task(if (isEdit) task.id else 0, taskRequest.title, taskRequest.note, isComplete, category, currentTime, if (isEdit) task.dateCreated else currentTime)
+            task = Task(if (isEdit) task.id else 0, taskBaseObservable.title, taskBaseObservable.note, isComplete, category, currentTime, if (isEdit) task.dateCreated else currentTime)
             if (isEdit) updateTask() else createTask()
         }
     }

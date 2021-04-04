@@ -7,6 +7,10 @@
         <variable
             name="taskDisplay"
             type="com.dstv.tododstv.core.models.TaskDisplay" />
+
+        <variable
+            name="status"
+            type="com.dstv.tododstv.core.enums.MultiSelectEnum" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

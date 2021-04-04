@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.dstv.tododstv.features.task.CreateTaskViewModel" />
+            type="com.dstv.tododstv.features.task.ManageTaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,7 +95,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:hint="Title"
             android:padding="16dp"
-            android:text="@={viewModel.taskRequest.title}"
+            android:text="@={viewModel.taskBaseObservable.title}"
             app:layout_constraintTop_toBottomOf="@id/taskSwitch" />
 
         <com.google.android.material.textfield.TextInputEditText
@@ -108,7 +108,7 @@
             android:gravity="top"
             android:hint="Note"
             android:padding="16dp"
-            android:text="@={viewModel.taskRequest.note}"
+            android:text="@={viewModel.taskBaseObservable.note}"
             app:layout_constraintTop_toBottomOf="@id/task" />
 
         <com.google.android.material.chip.ChipGroup
