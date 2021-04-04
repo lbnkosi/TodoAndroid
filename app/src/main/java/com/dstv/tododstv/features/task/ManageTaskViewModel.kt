@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskCategoryEnum
 import com.dstv.tododstv.core.extensions.getDate
-import com.dstv.tododstv.core.mappers.presenter.TaskMapper
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper.map
-import com.dstv.tododstv.core.mappers.presenter.TaskMapper.toDomain
 import com.dstv.tododstv.core.models.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -17,9 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ManageTaskViewModel @Inject constructor(
-    private val useCase: TaskUseCase
-): ViewModel() {
+class ManageTaskViewModel @Inject constructor(private val useCase: TaskUseCase) : ViewModel() {
 
     var category: Int = 1
 

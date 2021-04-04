@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dstv.domain.usecase.TaskUseCase
 import com.dstv.tododstv.core.enums.TaskSortEnum
-import com.dstv.tododstv.core.mappers.presenter.TaskMapper
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper.map
 import com.dstv.tododstv.core.mappers.presenter.TaskMapper.toDomain
 import com.dstv.tododstv.core.models.Category
@@ -21,9 +20,7 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class TodoViewModel @Inject constructor(
-    private val useCase: TaskUseCase
-) : ViewModel() {
+class TodoViewModel @Inject constructor(private val useCase: TaskUseCase) : ViewModel() {
 
     var multiSelectEnabled: Boolean = false
 

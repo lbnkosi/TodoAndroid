@@ -3,7 +3,6 @@ package com.dstv.data.mappers
 import com.dstv.data.entity.TaskEntity
 import com.dstv.domain.model.Task
 
-
 fun TaskEntity.map(): Task {
     return Task(id, title, note, complete, category, dateCreated, dateUpdated)
 }

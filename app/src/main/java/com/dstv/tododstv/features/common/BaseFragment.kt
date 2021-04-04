@@ -13,7 +13,7 @@ abstract class BaseFragment : Fragment() {
         openBottomSheet(aFragment).show(childFragmentManager, aFragment::class.java.name)
     }
 
-    fun openBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
+    private fun openBottomSheet(aFragment: BaseFragment): BottomSheetDialogUtilFragment {
         bottomSheetUtil = BottomSheetDialogUtilFragment.newInstance(aFragment)
         return bottomSheetUtil
     }

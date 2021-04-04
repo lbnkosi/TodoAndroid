@@ -8,9 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
-    private val useCase: TaskUseCase
-) : ViewModel() {
+class SettingsViewModel @Inject constructor(private val useCase: TaskUseCase) : ViewModel() {
 
     fun deleteAllTasks() {
         viewModelScope.launch {
