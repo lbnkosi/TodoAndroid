@@ -27,3 +27,7 @@ You only need Android Studio and a device running Android Marshmallow or SDK 23 
 
 * Android Device - minSdkVersion 23
 * Android Studio
+
+##Download
+
+You can download the app using this link: https://my.testfairy.com/download/74TKAD9G70S2TD1J68WKGC9J60SJT4JV7FYJBRAQ6Q7Y416H9E75Q46JGK03T/getapp?=1617690241
