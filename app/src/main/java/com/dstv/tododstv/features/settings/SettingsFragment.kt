@@ -8,7 +8,6 @@ import androidx.fragment.app.activityViewModels
 import com.dstv.tododstv.databinding.FragmentSettingsBinding
 import com.dstv.tododstv.features.common.BaseFragment
 import com.dstv.tododstv.features.common.TaskCallback
-import com.dstv.tododstv.features.todo.TodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,8 +34,7 @@ class SettingsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.deleteAll.setOnClickListener {
             viewModel.deleteAllTasks()
-            callback.onComplete()
+            callback.onComplete(true)
         }
     }
-
 }

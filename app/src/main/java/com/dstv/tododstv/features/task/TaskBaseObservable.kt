@@ -20,8 +20,9 @@ class TaskBaseObservable(private var _title: String = "", private var _note: Str
             notifyPropertyChanged(BR.note)
         }
 
+    //We don't check if the note is empty because sometimes there's no need for a note
     fun isRequestValid(): Boolean {
-        if (title.isNotEmpty() && note.isNotEmpty()) {
+        if (title.isNotEmpty()) {
             return true
         }
         return false

@@ -48,13 +48,10 @@ android {
 
 dependencies {
     Libs.apply {
-
         //Android/Google/Kotlin
         implementation(MATERIAL)
         implementation(APP_COMPAT)
-        implementation(VIEW_PAGER_2)
         implementation(ANDROID_CORE)
-        implementation(SWIPE_REFRESH)
         implementation(CONSTRAINT_LAYOUT)
         implementation(KOTLIN_STANDARD_LIB)
         implementation(KOTLIN_COROUTINES_ANDROID)
@@ -75,10 +72,10 @@ dependencies {
         implementation(LIFECYCLE_COMMON_JAVA_8)
 
         //Room
-        annotationProcessor(ROOM_COMPILER)
         implementation(ROOM_KTX)
         implementation(ROOM_RUNTIME)
         testImplementation(ROOM_TESTING)
+        annotationProcessor(ROOM_COMPILER)
 
         //Junit expresso
         testImplementation(JUNIT)

@@ -10,10 +10,10 @@ class CategoryDisplayMapper {
 
     private val categoryDisplayMapper = Function<Category, CategoryDisplay> {
         CategoryDisplay().apply {
-            category = it.title
-            taskCount = "${it.count} Tasks"
             complete = if (it.count == 0) 0 else getPercentage(it.complete, it.count)
+            taskCount = "${it.count} Tasks"
             completeText = "${complete}%"
+            category = it.title
         }
     }
 

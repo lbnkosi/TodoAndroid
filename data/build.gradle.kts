@@ -35,8 +35,6 @@ android {
 
 dependencies {
 
-    implementation(project(":domain"))
-
     Libs.apply {
 
         //Kotlin
@@ -53,8 +51,8 @@ dependencies {
 
         //Unit testing
         testImplementation(JUNIT)
-        androidTestImplementation(ANDROID_TEST_JUNIT)
         androidTestImplementation(ESPRESSO)
+        androidTestImplementation(ANDROID_TEST_JUNIT)
 
         //Hilt
         kapt(HILT_COMPILER)
@@ -66,4 +64,6 @@ dependencies {
         //Timber
         implementation(TIMBER)
     }
+
+    implementation(project(":domain"))
 }

@@ -12,10 +12,8 @@ object Libs {
 
     //Android - Google
     const val APP_COMPAT = "androidx.appcompat:appcompat:1.2.0"
-    const val VIEW_PAGER_2 = "androidx.viewpager2:viewpager2:1.0.0"
     const val MATERIAL = "com.google.android.material:material:1.3.0"
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.0.4"
-    const val SWIPE_REFRESH = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //Lottie
     const val LOTTIE = "com.airbnb.android:lottie:3.6.0"

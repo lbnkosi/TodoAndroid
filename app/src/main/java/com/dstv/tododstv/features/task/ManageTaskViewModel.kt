@@ -78,21 +78,18 @@ class ManageTaskViewModel @Inject constructor(private val useCase: TaskUseCase) 
         _success.value = false
     }
 
-    //Store a task entity in the db
     private fun createTask() {
         viewModelScope.launch {
             useCase.createTask(task.map()).collect { onSuccess() }
         }
     }
 
-    //Update a task entity in the db
     private fun updateTask() {
         viewModelScope.launch {
             useCase.updateTask(task.map()).collect { onSuccess() }
         }
     }
 
-    //Delete a task entity from the db
     fun deleteTask() {
         viewModelScope.launch {
             useCase.deleteTask(task.map()).collect { onSuccess() }

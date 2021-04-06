@@ -94,7 +94,9 @@
             android:background="@drawable/add_note_bg"
             android:fontFamily="@font/montserrat_regular"
             android:hint="Title"
+            android:nextFocusDown="@id/note"
             android:padding="16dp"
+            android:maxLines="1"
             android:text="@={viewModel.taskBaseObservable.title}"
             app:layout_constraintTop_toBottomOf="@id/taskSwitch" />
 
