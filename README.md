@@ -30,4 +30,4 @@ You only need Android Studio and a device running Android Marshmallow or SDK 23 
 
 ## Download
 
-You can download the app using this link: https://my.testfairy.com/download/74TKAD9G70S2TD1J68WKGC9J60SJT4JV7FYJBRAQ6Q7Y416H9E75Q46JGK03T/getapp?=1617690241
+You can download the app using this link: https://firebasestorage.googleapis.com/v0/b/apkstore-122d7.appspot.com/o/todoapp.apk?alt=media&token=e9d82677-86bf-427f-aeff-57abbddbdfef
