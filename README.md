@@ -1,4 +1,4 @@
-# Dstv/Multichoise Android Todo Assesment
+# Android Todo App
 
 ### Run it
 You only need Android Studio and a device running Android Marshmallow or SDK 23 to run the app.
