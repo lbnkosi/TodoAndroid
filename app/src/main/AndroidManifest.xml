@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.dstv.tododstv">
+    package="com.lbnkosi.todoapp">
 
     <application
-        android:name=".TodoApplication"
+        android:name="com.lbnkosi.todoapp.TodoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TodoDstv"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".features.todo.TodoActivity">
+        <activity android:name="com.lbnkosi.todoapp.features.todo.TodoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

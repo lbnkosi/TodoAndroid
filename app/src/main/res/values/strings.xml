@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TodoDstv</string>
+    <string name="app_name">TodoApp</string>
 
     <string name="okay_text">Okay</string>
     <string name="cancel">Cancel</string>

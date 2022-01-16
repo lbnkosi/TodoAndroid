@@ -6,7 +6,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/todoFragment"
-            android:name="com.dstv.tododstv.features.todo.TodoFragment"
+            android:name="com.lbnkosi.todoapp.features.todo.TodoFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:tag="TodoFragment" />

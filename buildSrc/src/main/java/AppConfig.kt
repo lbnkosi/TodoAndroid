@@ -10,7 +10,7 @@ object AppConfig {
 
     const val COMPILE_SDK_VERSION = 30
     const val BUILD_TOOLS_VERSION = "30.0.2"
-    const val APPLICATION_ID = "com.dstv.tododstv"
+    const val APPLICATION_ID = "com.lbnkosi.todoapp"
     const val MIN_SDK_VERSION = 23
     const val TARGET_SDK_VERSION = 30
     const val VERSION_CODE = 1

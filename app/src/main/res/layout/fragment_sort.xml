@@ -3,11 +3,11 @@
 
     <data>
 
-        <import type="com.dstv.tododstv.core.enums.TaskSortEnum" />
+        <import type="com.lbnkosi.todoapp.core.enums.TaskSortEnum" />
 
         <variable
             name="viewModel"
-            type="com.dstv.tododstv.features.todo.TodoViewModel" />
+            type="com.lbnkosi.todoapp.features.todo.TodoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

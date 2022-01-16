@@ -5,7 +5,7 @@
     <data>
         <variable
             name="categoryDisplay"
-            type="com.dstv.tododstv.core.models.CategoryDisplay" />
+            type="com.lbnkosi.todoapp.core.models.CategoryDisplay" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -6,11 +6,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.dstv.tododstv.core.enums.TaskCategoryEnum" />
+        <import type="com.lbnkosi.todoapp.core.enums.TaskCategoryEnum" />
 
         <variable
             name="viewModel"
-            type="com.dstv.tododstv.features.task.ManageTaskViewModel" />
+            type="com.lbnkosi.todoapp.features.task.ManageTaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

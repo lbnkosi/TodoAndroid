@@ -1,1 +1,1 @@
-/Users/lebogang/Documents/TodoDstv/buildSrc/build/classes/kotlin/main/AppConfig.class:/Users/lebogang/Documents/TodoDstv/buildSrc/build/classes/kotlin/main/Libs.class
+/Users/lnkosi/Documents/Projects/Android/TodoDstv/buildSrc/build/classes/kotlin/main/AppConfig.class:/Users/lnkosi/Documents/Projects/Android/TodoDstv/buildSrc/build/classes/kotlin/main/Libs.class
